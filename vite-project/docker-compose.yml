@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Map backend container port 5000 to host port 5000
+    networks:
+      - app-network
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5000
+
+  frontend:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173" # Map frontend container port 5173 to host port 5173
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
